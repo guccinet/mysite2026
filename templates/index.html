@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysite2026 | Unleash the power</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #22d3ee;
+            --accent-glow: rgba(34, 211, 238, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background Effects */
+        .bg-glow {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at top, black 40%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 40%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            color: var(--text-main);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 1rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom right, #ffffff, #71717a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .learn-more {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .learn-more:hover {
+            color: var(--text-main);
+        }
+
+        .learn-more svg {
+            transition: transform 0.3s ease;
+        }
+
+        .learn-more:hover svg {
+            transform: translateY(5px);
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+            perspective: 1500px;
+        }
+
+        .dashboard-wrapper {
+            position: relative;
+            transform: rotateX(20deg);
+            transform-style: preserve-3d;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .dashboard-wrapper:hover {
+            transform: rotateX(10deg);
+        }
+
+        .dashboard-img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            /* Placeholder for actual dashboard image, using a sleek gradient for now */
+            background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Fake Dashboard UI */
+        .dash-header {
+            height: 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            gap: 1rem;
+        }
+
+        .dash-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3f3f46;
+        }
+
+        .dash-body {
+            display: flex;
+            flex: 1;
+        }
+
+        .dash-sidebar {
+            width: 200px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+        }
+
+        .dash-line {
+            height: 12px;
+            border-radius: 6px;
+            background: #27272a;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .dash-main {
+            flex: 1;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .dash-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        /* Feature Section */
+        .features {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feature-text h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom right, #ffffff, #71717a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .feature-text p span {
+            color: var(--text-main);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-wrapper {
+                transform: rotateX(0);
+            }
+
+            .dashboard-img {
+                min-height: 300px;
+            }
+
+            .dash-main {
+                grid-template-columns: 1fr;
+            }
+
+            .dash-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+    <div class="bg-glow"></div>
+
+    <nav>
+        <a href="#" class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+            Mysite2026
+        </a>
+        <div class="nav-links">
+            <a href="#">Blog</a>
+            <a href="#" class="btn-primary">Join the waitlist</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Unleash the power of intuitive finance</h1>
+        <p>Say goodbye to the outdated financial tools. Every small business owner, regardless of the background, can
+            now manage their business like a pro. Simple. Intuitive. And never boring.</p>
+
+        <div class="hero-actions">
+            <a href="#" class="btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">Join the waitlist</a>
+            <a href="#features" class="learn-more">
+                Learn more
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="dashboard-preview">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-img">
+                <div class="dash-header">
+                    <div class="dash-circle" style="background:#ef4444"></div>
+                    <div class="dash-circle" style="background:#eab308"></div>
+                    <div class="dash-circle" style="background:#22c55e"></div>
+                </div>
+                <div class="dash-body">
+                    <div class="dash-sidebar">
+                        <div class="dash-line" style="width: 80%"></div>
+                        <div class="dash-line" style="width: 60%"></div>
+                        <div class="dash-line" style="width: 70%"></div>
+                        <div class="dash-line" style="width: 50%; margin-top: 2rem;"></div>
+                        <div class="dash-line" style="width: 65%"></div>
+                    </div>
+                    <div class="dash-main">
+                        <div class="dash-card"
+                            style="grid-column: 1 / -1; height: 150px; background: linear-gradient(to right, rgba(56, 189, 248, 0.1), transparent)">
+                        </div>
+                        <div class="dash-card" style="height: 200px;"></div>
+                        <div class="dash-card" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="feature-text">
+            <h2>Who said finance has to be boring?</h2>
+            <p>With Mysite2026, managing your business finances is effortless, empowering, and anything but boring. Our
+                intuitive platform brings clarity to your cash flow, simplifies your financial decision-making, and puts
+                the power of advanced financial management right at your fingertips. <span>Say no to spreadsheets and
+                    tools designed in the 80s.</span></p>
+        </div>
+        <div class="dash-card"
+            style="height: 300px; background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), transparent); border-color: rgba(34, 211, 238, 0.2);">
+            <!-- Decorative element -->
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)"
+                    stroke-width="1">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

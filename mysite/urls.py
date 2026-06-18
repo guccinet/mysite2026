@@ -18,6 +18,7 @@ from django.urls import include
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def info(request):
     ip_address = request.META["REMOTE_ADDR"]
@@ -27,9 +28,16 @@ def info(request):
         res += f'<p>{k}: {v}</p>'
     return HttpResponse(res)
 
+def home(request):
+    return render(request, 'index.html')
+
+def index(request):
+    return render(request, 'index.html')
 
 urlpatterns = [
     path('info/', info),
     path("admin/", admin.site.urls),
+    path('', home),
+    path('index/', index),
     # path("", include("blog.urls")),
 ]
